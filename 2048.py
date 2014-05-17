@@ -30,60 +30,65 @@ def inicializa(tabuleiro):
 def esquerda(tabuleiro):
     for linha in tabuleiro:
         for c in range(3):
-            para = linha[c] != 0
-            position_insert = c if not para else c+1
-            for next in range(c+1,4):            
-                if linha[c] == linha[next] and linha[c] != 0:
+            for next_position in range(c+1,4):            
+                if linha[c] == linha[next_position] and linha[c] != 0:
                     linha[c] = linha[c] * 2
-                    linha[next] = 0
+                    linha[next_position] = 0
                     break
-                elif linha[next] != 0:
-                    linha[position_insert], linha[next] = linha[next],0
+                elif linha[next_position] != 0:
+                    para = linha[c] != 0
+                    position_insert = c if not para else c+1
+                    if position_insert != next_position:
+                        linha[position_insert], linha[next_position] = linha[next_position],0
                     if para:
                         break
 
 def direita(tabuleiro):
     for linha in tabuleiro:
         for c in range(3,0, -1):
-            para = linha[c] != 0
-            position_insert = c if not para else c-1
-            for next in range(c-1, -1, -1):            
-                if linha[c] == linha[next] and linha[c] != 0:
+            for next_position in range(c-1, -1, -1):            
+                if linha[c] == linha[next_position] and linha[c] != 0:
                     linha[c] = linha[c] * 2
-                    linha[next] = 0
+                    linha[next_position] = 0
                     break
-                elif linha[next] != 0:
-                    linha[position_insert], linha[next] = linha[next],0
+                elif linha[next_position] != 0:
+                    para = linha[c] != 0
+                    position_insert = c if not para else c-1
+                    if position_insert != next_position:
+                        linha[position_insert], linha[next_position] = linha[next_position],0
                     if para:
                         break
 
 def sobe(tabuleiro):
     for coluna in range(4):
         for linha in range(3):
-            para = tabuleiro[linha][coluna] != 0
-            position_insert = linha if not para else linha+1    
-            for next in range(linha+1,4):            
-                if tabuleiro[linha][coluna] == tabuleiro[next][coluna] and tabuleiro[linha][coluna] != 0:
+            for next_position in range(linha+1,4):            
+                if tabuleiro[linha][coluna] == tabuleiro[next_position][coluna] and tabuleiro[linha][coluna] != 0:
                     tabuleiro[linha][coluna] = tabuleiro[linha][coluna] * 2
-                    tabuleiro[next][coluna] = 0
+                    tabuleiro[next_position][coluna] = 0
                     break
-                elif tabuleiro[next][coluna] != 0:
-                    tabuleiro[position_insert][coluna], tabuleiro[next][coluna] = tabuleiro[next][coluna],0
+                elif tabuleiro[next_position][coluna] != 0:
+                    para = tabuleiro[linha][coluna] != 0
+                    position_insert = linha if not para else linha+1    
+                    
+                    if position_insert != next_position:    
+                        tabuleiro[position_insert][coluna], tabuleiro[next_position][coluna] = tabuleiro[next_position][coluna],0
                     if para:
                         break
 
 def desce(tabuleiro):
     for coluna in range(4):
         for linha in range(3,0,-1):
-            para = tabuleiro[linha][coluna] != 0
-            position_insert = linha if not para else linha-1
-            for next in range(linha-1,-1, -1):            
-                if tabuleiro[linha][coluna] == tabuleiro[next][coluna] and tabuleiro[linha][coluna] != 0:
+            for next_position in range(linha-1,-1, -1):            
+                if tabuleiro[linha][coluna] == tabuleiro[next_position][coluna] and tabuleiro[linha][coluna] != 0:
                     tabuleiro[linha][coluna] = tabuleiro[linha][coluna] * 2
-                    tabuleiro[next][coluna] = 0
+                    tabuleiro[next_position][coluna] = 0
                     break
-                elif tabuleiro[next][coluna] != 0:
-                    tabuleiro[position_insert][coluna], tabuleiro[next][coluna] = tabuleiro[next][coluna],0
+                elif tabuleiro[next_position][coluna] != 0:
+                    para = tabuleiro[linha][coluna] != 0
+                    position_insert = linha if not para else linha-1
+                    if position_insert != next_position:
+                        tabuleiro[position_insert][coluna], tabuleiro[next_position][coluna] = tabuleiro[next_position][coluna],0
                     if para:
                         break
 
